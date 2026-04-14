@@ -1,11 +1,24 @@
 
-  # Portfolio for Data/AI Engineer
+  # Portfolio — Sir William NGOMA
 
-  This is a code bundle for Portfolio for Data/AI Engineer. The original project is available at https://www.figma.com/design/ouNEKNlAozvJe5irVc8PLY/Portfolio-for-Data-AI-Engineer.
+  Portfolio personnel de Sir William NGOMA — Software Engineer.
 
-  ## Running the code
+  Développé avec React, TypeScript, Vite et Tailwind CSS.
 
-  Run `npm i` to install the dependencies.
+  ## Lancer le projet
 
-  Run `npm run dev` to start the development server.
+  ```bash
+  npm install
+  npm run dev
+  ```
+
+  ## Tests
+
+  ```bash
+  npm run test
+  ```
+
+  ## Déploiement
+
+  Le site est déployé sur Vercel.
   

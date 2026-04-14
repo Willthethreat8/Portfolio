@@ -1,0 +1,22 @@
+node_modules/
+dist/
+.env
+.env.local
+
+# SonarQube
+.scannerwork/
+sonar-project.properties
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build / cache
+*.tsbuildinfo
+coverage/
