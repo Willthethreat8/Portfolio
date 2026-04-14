@@ -38,11 +38,6 @@ describe("Home – Page d'accueil", () => {
     expect(screen.getByText(/disponible pour un cdi/i)).toBeInTheDocument();
   });
 
-  it("affiche le badge recherche développeur IA", () => {
-    renderHome();
-    expect(screen.getByText(/recherche développeur ia/i)).toBeInTheDocument();
-  });
-
   it("affiche les 5 badges d'expertise", () => {
     renderHome();
     expect(screen.getByText("Dev Full Stack")).toBeInTheDocument();

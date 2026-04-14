@@ -152,18 +152,7 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="bg-green-500/10 border border-green-400/25 rounded-xl p-5">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <h3 className="font-bold text-green-300 text-sm" style={{ fontFamily: "var(--font-heading)" }}>
-                Disponibilité
-              </h3>
-            </div>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              Diplômé en juillet 2026. Ouvert aux opportunités à partir de
-              septembre 2026 en CDI.
-            </p>
-          </div>
+
         </motion.div>
 
         <motion.div

@@ -23,11 +23,6 @@ export function Home() {
                 Disponible pour un CDI · À partir d'octobre 2026
               </span>
             </div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-500/20 border border-purple-400/40 rounded-full">
-              <span className="text-purple-300 text-sm" style={{ fontFamily: "var(--font-heading)" }}>
-                🔎 Recherche développeur IA
-              </span>
-            </div>
           </div>
 
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-2 leading-tight" style={{ fontFamily: "var(--font-heading)" }}>
