@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>OG Image Generator</title>
+  <style>
+    body { margin: 0; padding: 0; background: #000; display: flex; align-items: center; justify-content: center; height: 100vh; }
+    .og {
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .og::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(99,102,241,0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 60%, rgba(168,85,247,0.15) 0%, transparent 50%);
+    }
+    .name {
+      font-size: 64px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      z-index: 1;
+    }
+    .title {
+      font-size: 36px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #22c55e, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      z-index: 1;
+      margin-bottom: 32px;
+    }
+    .badges {
+      display: flex;
+      gap: 12px;
+      z-index: 1;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 900px;
+    }
+    .badge {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 8px 20px;
+      border-radius: 999px;
+      font-size: 18px;
+      color: #e2e8f0;
+    }
+    .school {
+      position: absolute;
+      bottom: 40px;
+      font-size: 20px;
+      color: #94a3b8;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="og">
+    <div class="name">Sir William NGOMA</div>
+    <div class="title">Software Engineer</div>
+    <div class="badges">
+      <div class="badge">Dev Full Stack</div>
+      <div class="badge">Data Engineer</div>
+      <div class="badge">Business Analyst</div>
+      <div class="badge">IA Générative</div>
+      <div class="badge">Chef de Projet</div>
+    </div>
+    <div class="school">ESIR 2026 — Université de Rennes 1</div>
+  </div>
+  <script>
+    // Instructions: Ouvrir ce fichier dans le navigateur,
+    // faire un clic droit sur le rectangle > "Inspecter",
+    // puis dans la console: 
+    // document.querySelector('.og').scrollIntoView()
+    // Utiliser l'outil screenshot de DevTools (Ctrl+Shift+P > "Capture node screenshot")
+    // ou simplement faire une capture d'écran recadrée à 1200x630
+  </script>
+</body>
+</html>

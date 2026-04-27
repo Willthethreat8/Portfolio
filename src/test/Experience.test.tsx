@@ -46,7 +46,7 @@ describe("Experience – Parcours & Expériences", () => {
   it("affiche l'expérience Acanthe Data & IA", () => {
     renderExperience();
     expect(screen.getByText("Data & IA Engineer")).toBeInTheDocument();
-    expect(screen.getByText(/acanthe/i)).toBeInTheDocument();
+    expect(screen.getByText("Acanthe (Filiale de BLOT Immobilier)")).toBeInTheDocument();
     expect(screen.getByText("Contrat de professionnalisation")).toBeInTheDocument();
   });
 
@@ -69,7 +69,7 @@ describe("Experience – Parcours & Expériences", () => {
   it("affiche le résumé quand la carte est fermée", () => {
     renderExperience();
     // Summaries should be visible when collapsed
-    expect(screen.getByText(/pipelines de données.*etl/i)).toBeInTheDocument();
+    expect(screen.getByText(/professionnalisation de la gestion des données de prospection/i)).toBeInTheDocument();
   });
 
   it("déploie les missions au clic sur une carte", async () => {

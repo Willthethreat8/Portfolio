@@ -228,9 +228,9 @@ export function Home() {
 
       <div className="mt-16 text-center">
         <blockquote className="text-2xl md:text-3xl font-medium text-slate-300 italic max-w-3xl mx-auto">
-          "Cela semble toujours impossible, jusqu'à ce que ce soit fait."
+          "You never let [the learner] do something that isn’t the real thing—but you have to work your ass off to figure out what the real thing is in the context of the way their minds are working at that developmental level."
         </blockquote>
-        <p className="text-slate-500 mt-3 text-sm">— Nelson Mandela</p>
+        <p className="text-slate-500 mt-3 text-sm">— Alan Kay</p>
       </div>
     </div>
   );
