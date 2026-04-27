@@ -545,6 +545,20 @@ export function Experience() {
                 "Approches agiles et traditionnelles",
               ],
             },
+            {
+              title: "Scientific Computing with Python",
+              issuer: "freeCodeCamp",
+              date: "Avril 2026",
+              location: "En ligne",
+              accent: "blue",
+              highlights: [
+                "Maîtrise des fondamentaux Python (variables, structures de contrôle, fonctions)",
+                "Manipulation avancée des chaînes de caractères et structures de données",
+                "Programmation orientée objet et modularisation de code",
+                "Lecture/écriture de fichiers et gestion des exceptions",
+                "Résolution d'exercices pratiques de calcul scientifique en Python",
+              ],
+            },
           ].map((cert, index) => {
             const a = accentMap[cert.accent as AccentKey];
             return (

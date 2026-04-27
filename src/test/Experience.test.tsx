@@ -101,12 +101,14 @@ describe("Experience – Parcours & Expériences", () => {
 
   // ── Certifications ──
 
-  it("affiche les 2 certifications", () => {
+  it("affiche les 3 certifications", () => {
     renderExperience();
     expect(screen.getByText(/python pour la data analyse/i)).toBeInTheDocument();
     expect(screen.getByText(/datascientest/i)).toBeInTheDocument();
     expect(screen.getByText(/mooc gestion de projet/i)).toBeInTheDocument();
     expect(screen.getByText(/centrale lille/i)).toBeInTheDocument();
+    expect(screen.getByText(/scientific computing with python/i)).toBeInTheDocument();
+    expect(screen.getByText(/freecodecamp/i)).toBeInTheDocument();
   });
 
   // ── Qualités retirées ──
