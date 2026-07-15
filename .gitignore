@@ -20,3 +20,6 @@ Thumbs.db
 # Build / cache
 *.tsbuildinfo
 coverage/
+
+# CV sources dropped at the repo root (only public/*.pdf is served)
+/*.pdf
