@@ -9,8 +9,8 @@ const projects = [
     icon: "✈️",
     wip: true,
     description:
-      "Plateforme end-to-end de surveillance de l'usure des moteurs d'avions, capable de prédire la durée de vie restante (RUL) et d'afficher l'état de la flotte sur une carte 3D en temps réel. Architecture Lambda combinant batch processing (Airflow, dbt) et streaming (Kafka, Spark), avec modèle ML (XGBoost) servi via FastAPI et tracking MLflow.",
-    stack: ["Python", "Docker", "Kafka", "Spark", "Airflow", "dbt", "PostGIS", "FastAPI", "XGBoost", "MLflow", "Kepler.gl", "Grafana"],
+      "Jumeau numérique de flotte aéronautique construit autour du dataset N-CMAPSS DS01 : ingestion PostGIS, météo METAR et trajectoires simulées depuis LFBO. Prédiction de la durée de vie résiduelle (RUL) par XGBoost, API FastAPI et suivi des expériences avec MLflow.",
+    stack: ["Python", "Docker", "Prefect", "dbt", "PostGIS", "GeoPandas", "FastAPI", "XGBoost", "MLflow", "Streamlit"],
     date: "2026",
     links: { github: "https://github.com/Willthethreat8/Data_project" },
   },
