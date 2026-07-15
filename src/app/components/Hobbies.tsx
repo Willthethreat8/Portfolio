@@ -7,8 +7,11 @@ import {
   Gamepad2,
   Dumbbell,
 } from "lucide-react";
+import { useLang } from "../i18n";
 
 export function Hobbies() {
+  const { t } = useLang();
+
   const hobbies = [
     {
       title: "Basketball",
@@ -19,11 +22,11 @@ export function Hobbies() {
       bar: "from-orange-500 to-amber-500",
       glow: "hover:shadow-orange-500/10",
       items: [
-        "Passion pour le sport collectif et l'esprit d'équipe",
+        t("Passion pour le sport collectif et l'esprit d'équipe", "Passion for team sports and team spirit"),
       ],
     },
     {
-      title: "Vélo",
+      title: t("Vélo", "Cycling"),
       icon: Plane,
       accent: "text-green-500",
       iconBg: "bg-green-500/15",
@@ -31,11 +34,11 @@ export function Hobbies() {
       bar: "from-green-500 to-emerald-500",
       glow: "hover:shadow-green-500/10",
       items: [
-        "Balades et exploration de nouveaux horizons",
+        t("Balades et exploration de nouveaux horizons", "Rides and exploring new horizons"),
       ],
     },
     {
-      title: "Jeux Vidéos",
+      title: t("Jeux Vidéos", "Video Games"),
       icon: Gamepad2,
       accent: "text-purple-500",
       iconBg: "bg-purple-500/15",
@@ -43,11 +46,11 @@ export function Hobbies() {
       bar: "from-purple-500 to-violet-500",
       glow: "hover:shadow-purple-500/10",
       items: [
-        "Gaming et découverte de mondes virtuels",
+        t("Gaming et découverte de mondes virtuels", "Gaming and exploring virtual worlds"),
       ],
     },
     {
-      title: "Dessins",
+      title: t("Dessins", "Drawing"),
       icon: Camera,
       accent: "text-pink-500",
       iconBg: "bg-pink-500/15",
@@ -55,11 +58,11 @@ export function Hobbies() {
       bar: "from-pink-500 to-rose-500",
       glow: "hover:shadow-pink-500/10",
       items: [
-        "Expression artistique et créativité",
+        t("Expression artistique et créativité", "Artistic expression and creativity"),
       ],
     },
     {
-      title: "Marche",
+      title: t("Marche", "Hiking"),
       icon: Plane,
       accent: "text-cyan-500",
       iconBg: "bg-cyan-500/15",
@@ -67,11 +70,11 @@ export function Hobbies() {
       bar: "from-cyan-500 to-sky-500",
       glow: "hover:shadow-cyan-500/10",
       items: [
-        "Randonnées et connexion avec la nature",
+        t("Randonnées et connexion avec la nature", "Hikes and connecting with nature"),
       ],
     },
     {
-      title: "Musique & Danse",
+      title: t("Musique & Danse", "Music & Dance"),
       icon: Book,
       accent: "text-purple-500",
       iconBg: "bg-purple-500/15",
@@ -79,11 +82,11 @@ export function Hobbies() {
       bar: "from-purple-500 to-violet-500",
       glow: "hover:shadow-purple-500/10",
       items: [
-        "Rythmes et mouvements, passion pour la culture",
+        t("Rythmes et mouvements, passion pour la culture", "Rhythm and movement, a passion for culture"),
       ],
     },
     {
-      title: "Cuisine du Monde",
+      title: t("Cuisine du Monde", "World Cuisine"),
       icon: Dumbbell,
       accent: "text-orange-500",
       iconBg: "bg-orange-500/15",
@@ -91,11 +94,11 @@ export function Hobbies() {
       bar: "from-orange-500 to-amber-500",
       glow: "hover:shadow-orange-500/10",
       items: [
-        "Exploration culinaire et saveurs internationales",
+        t("Exploration culinaire et saveurs internationales", "Culinary exploration and international flavors"),
       ],
     },
     {
-      title: "Photographie",
+      title: t("Photographie", "Photography"),
       icon: Camera,
       accent: "text-sky-400",
       iconBg: "bg-sky-500/15",
@@ -103,7 +106,7 @@ export function Hobbies() {
       bar: "from-sky-400 to-blue-500",
       glow: "hover:shadow-sky-500/10",
       items: [
-        "Capturer les moments et la beauté du quotidien",
+        t("Capturer les moments et la beauté du quotidien", "Capturing moments and everyday beauty"),
       ],
     },
   ];
@@ -112,64 +115,80 @@ export function Hobbies() {
     {
       emoji: "🤖",
       accent: "border-blue-400/20 hover:border-blue-400/40",
-      title: "Intelligence Artificielle",
-      description:
+      title: t("Intelligence Artificielle", "Artificial Intelligence"),
+      description: t(
         "Passionné par les avancées en IA générative, vision par ordinateur et NLP",
+        "Passionate about advances in generative AI, computer vision and NLP",
+      ),
     },
     {
       emoji: "🌱",
       accent: "border-green-400/20 hover:border-green-400/40",
-      title: "Écologie & Tech",
-      description:
+      title: t("Écologie & Tech", "Ecology & Tech"),
+      description: t(
         "Intéressé par les technologies vertes et l'informatique durable (Green IT)",
+        "Interested in green technologies and sustainable computing (Green IT)",
+      ),
     },
     {
       emoji: "🏦",
       accent: "border-yellow-400/20 hover:border-yellow-400/40",
-      title: "Banque & Finance",
-      description:
+      title: t("Banque & Finance", "Banking & Finance"),
+      description: t(
         "Curiosité pour la fintech, les marchés financiers et l'application de la data dans le secteur bancaire",
+        "Curious about fintech, financial markets and applying data in the banking sector",
+      ),
     },
     {
       emoji: "✈️",
       accent: "border-orange-400/20 hover:border-orange-400/40",
-      title: "Aéronautique",
-      description:
+      title: t("Aéronautique", "Aeronautics"),
+      description: t(
         "Passionné par l'aviation, la maintenance prédictive et les systèmes embarqués aéronautiques",
+        "Passionate about aviation, predictive maintenance and aeronautical embedded systems",
+      ),
     },
     {
       emoji: "🌍",
       accent: "border-cyan-400/20 hover:border-cyan-400/40",
-      title: "Impact Social",
-      description:
+      title: t("Impact Social", "Social Impact"),
+      description: t(
         "Utilisation de la tech pour résoudre des problèmes sociaux et environnementaux",
+        "Using tech to solve social and environmental problems",
+      ),
     },
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-10">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 60, damping: 18 }}
-        className="text-center mb-12"
+        className="text-center mb-8"
       >
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: "var(--font-heading)" }}>
-          Hobbies & Passions
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-heading)" }}>
+          {t("Hobbies & Passions", "Hobbies & Passions")}
         </h1>
-        <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-          Au-delà de la technique, découvrez mes centres d'intérêt et ce qui me
-          passionne au quotidien
+        <p className="text-base text-slate-400 max-w-3xl mx-auto">
+          {t(
+            "Au-delà de la technique, découvrez mes centres d'intérêt et ce qui me passionne au quotidien",
+            "Beyond the technical side, discover my interests and what drives me every day",
+          )}
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
         {hobbies.map((hobby, index) => {
           const Icon = hobby.icon;
           return (
-            <div
+            <motion.div
               key={hobby.title}
-              className={`relative bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border ${hobby.border} hover:shadow-lg ${hobby.glow} transition-all duration-300 group overflow-hidden`}
+              initial={{ opacity: 0, y: 24, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ type: "spring", stiffness: 110, damping: 16, delay: index * 0.05 }}
+              className={`relative bg-slate-800/60 backdrop-blur-sm rounded-xl p-5 border ${hobby.border} hover:shadow-lg ${hobby.glow} transition-all duration-300 group overflow-hidden`}
             >
               <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${hobby.bar} opacity-60 group-hover:opacity-100 transition-opacity`} />
 
@@ -192,28 +211,32 @@ export function Hobbies() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           );
         })}
       </div>
 
-      <div className="mb-16">
-        <h2 className="text-3xl font-bold text-white mb-8 text-center" style={{ fontFamily: "var(--font-heading)" }}>
-          Centres d'intérêt
+      <div className="mb-10">
+        <h2 className="text-2xl font-bold text-white mb-6 text-center" style={{ fontFamily: "var(--font-heading)" }}>
+          {t("Centres d'intérêt", "Interests")}
         </h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {interests.map((interest, index) => (
-            <div
+            <motion.div
               key={interest.title}
-              className={`bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border ${interest.accent} hover:shadow-md transition-all duration-300 hover:-translate-y-1`}
+              initial={{ opacity: 0, y: 24, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ type: "spring", stiffness: 110, damping: 16, delay: index * 0.05 }}
+              className={`bg-slate-800/60 backdrop-blur-sm rounded-xl p-5 border ${interest.accent} hover:shadow-md transition-all duration-300 hover:-translate-y-1`}
             >
-              <div className="text-4xl mb-3">{interest.emoji}</div>
-              <h3 className="font-bold text-white mb-2" style={{ fontFamily: "var(--font-heading)" }}>
+              <div className="text-3xl mb-2">{interest.emoji}</div>
+              <h3 className="font-bold text-white mb-1.5 text-sm" style={{ fontFamily: "var(--font-heading)" }}>
                 {interest.title}
               </h3>
               <p className="text-slate-400 text-sm leading-relaxed">{interest.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

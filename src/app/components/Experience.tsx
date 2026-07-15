@@ -13,6 +13,7 @@ import {
   Images,
 } from "lucide-react";
 import { useState } from "react";
+import { useLang } from "../i18n";
 
 
 type AccentKey = "green" | "blue" | "purple" | "yellow";
@@ -86,123 +87,159 @@ interface ExperienceItem {
   links: { github?: string; demo?: string; images?: string };
 }
 
-const experiences: ExperienceItem[] = [
+type TFunc = (fr: string, en: string) => string;
+
+const getExperiences = (t: TFunc): ExperienceItem[] => [
   {
     title: "Data & IA Engineer",
-    type: "Contrat de professionnalisation",
-    company: "Acanthe (Filiale de BLOT Immobilier)",
-    period: "Septembre 2025 – Présent",
+    type: t("Contrat de professionnalisation", "Professional training contract"),
+    company: t("Acanthe (Filiale de BLOT Immobilier)", "Acanthe (subsidiary of BLOT Immobilier)"),
+    period: t("Septembre 2025 – Présent", "September 2025 – Present"),
     location: "Rennes, France",
     accent: "green",
-    summary:
+    summary: t(
       "Mission de professionnalisation de la gestion des données de prospection, amélioration de la détection de signaux faibles et intégration d'outils d'IA dans les processus internes d'Acanthe, en collaboration avec Conjecto.",
+      "Professionalizing prospecting data management, improving weak-signal detection and integrating AI tools into Acanthe's internal processes, in collaboration with Conjecto.",
+    ),
     achievements: [
-      "Structuration des données de prospection dans le CRM interne (V4), avec nettoyage et enrichissement via open data (DVF, INSEE, données cadastrales)",
-      "Développement d'un module de détection de signaux faibles via crawling, NLP et classification automatique",
-      "Intégration de notifications dynamiques avec déclencheurs d'événements métier",
-      "Mise en œuvre de traitements géospatiaux (SIG) sur des données de zonage urbain (PLU / 2AU)",
-      "Classement automatisé de documents en lien avec les workflows internes",
-      "Appui technique à l'intégration de solutions d'agents conversationnels vocaux / chatbots IA",
-      "Évaluation de solutions de traitement de documents juridiques (SaaS et open source)",
+      t(
+        "Structuration des données de prospection dans le CRM interne (V4), avec nettoyage et enrichissement via open data (DVF, INSEE, données cadastrales)",
+        "Structuring prospecting data in the internal CRM (V4), with cleaning and enrichment via open data (DVF, INSEE, cadastral data)",
+      ),
+      t(
+        "Développement d'un module de détection de signaux faibles via crawling, NLP et classification automatique",
+        "Development of a weak-signal detection module using crawling, NLP and automatic classification",
+      ),
+      t(
+        "Intégration de notifications dynamiques avec déclencheurs d'événements métier",
+        "Integration of dynamic notifications with business event triggers",
+      ),
+      t(
+        "Mise en œuvre de traitements géospatiaux (SIG) sur des données de zonage urbain (PLU / 2AU)",
+        "Implementation of geospatial (GIS) processing on urban zoning data (PLU / 2AU)",
+      ),
+      t(
+        "Classement automatisé de documents en lien avec les workflows internes",
+        "Automated document classification linked to internal workflows",
+      ),
+      t(
+        "Appui technique à l'intégration de solutions d'agents conversationnels vocaux / chatbots IA",
+        "Technical support for integrating voice conversational agents / AI chatbots",
+      ),
+      t(
+        "Évaluation de solutions de traitement de documents juridiques (SaaS et open source)",
+        "Evaluation of legal document processing solutions (SaaS and open source)",
+      ),
     ],
-    skills: ["Python", "Pandas", "Requests", "Scrapy", "NLP", "SQL", "API REST", "Open Data", "SIG", "QGIS", "PostGIS", "Automatisation", "n8n", "Zapier"],
+    skills: ["Python", "Pandas", "Requests", "Scrapy", "NLP", "SQL", "API REST", "Open Data", t("SIG", "GIS"), "QGIS", "PostGIS", t("Automatisation", "Automation"), "n8n", "Zapier"],
     links: {},
   },
   {
-    title: "Développeur IA Générative",
-    type: "Stage",
+    title: t("Développeur IA Générative", "Generative AI Developer"),
+    type: t("Stage", "Internship"),
     company: "MBCS",
-    period: "Juin 2025 – Septembre 2025",
+    period: t("Juin 2025 – Septembre 2025", "June 2025 – September 2025"),
     location: "Dinan, France",
     accent: "purple",
-    summary:
+    summary: t(
       "Conception et déploiement d'agents intelligents utilisant le RAG et les LLMs. Développement de workflows d'automatisation et d'interfaces web pour chatbots IA.",
+      "Design and deployment of intelligent agents using RAG and LLMs. Development of automation workflows and web interfaces for AI chatbots.",
+    ),
     achievements: [
-      "Conception et déploiement d'agents intelligents utilisant le RAG (Retrieval-Augmented Generation) et les LLMs",
-      "Développement de workflows d'automatisation avec n8n et Langchain",
-      "Création d'interfaces web responsives pour chatbots IA (HTML, CSS, JS, PHP)",
+      t(
+        "Conception et déploiement d'agents intelligents utilisant le RAG (Retrieval-Augmented Generation) et les LLMs",
+        "Design and deployment of intelligent agents using RAG (Retrieval-Augmented Generation) and LLMs",
+      ),
+      t(
+        "Développement de workflows d'automatisation avec n8n et Langchain",
+        "Development of automation workflows with n8n and Langchain",
+      ),
+      t(
+        "Création d'interfaces web responsives pour chatbots IA (HTML, CSS, JS, PHP)",
+        "Creation of responsive web interfaces for AI chatbots (HTML, CSS, JS, PHP)",
+      ),
     ],
     skills: ["RAG", "LLMs", "n8n", "Langchain", "HTML/CSS/JS", "PHP"],
     links: {},
   },
   {
-    title: "Employé Back-Office",
-    type: "CDD",
+    title: t("Employé Back-Office", "Back-Office Employee"),
+    type: t("CDD", "Fixed-term contract"),
     company: "Zara",
-    period: "Septembre 2022 – Novembre 2022",
+    period: t("Septembre 2022 – Novembre 2022", "September 2022 – November 2022"),
     location: "Lyon, France",
     accent: "blue",
-    summary:
+    summary: t(
       "Gestion des flux de marchandises et suivi logistique via outils informatiques en période de forte affluence.",
+      "Goods flow management and logistics tracking using IT tools during peak periods.",
+    ),
     achievements: [
-      "Gestion des flux de marchandises : réception, tri, mise en rayon",
-      "Utilisation d'un terminal mobile pour le suivi des articles et des stocks",
-      "Saisie de données et suivi logistique via poste informatique",
-      "Application rigoureuse des procédures internes en période de forte affluence",
+      t(
+        "Gestion des flux de marchandises : réception, tri, mise en rayon",
+        "Goods flow management: receiving, sorting, shelving",
+      ),
+      t(
+        "Utilisation d'un terminal mobile pour le suivi des articles et des stocks",
+        "Use of a mobile terminal for item and stock tracking",
+      ),
+      t(
+        "Saisie de données et suivi logistique via poste informatique",
+        "Data entry and logistics tracking via computer workstation",
+      ),
+      t(
+        "Application rigoureuse des procédures internes en période de forte affluence",
+        "Rigorous application of internal procedures during peak periods",
+      ),
     ],
-    skills: ["Logistique", "Gestion de stocks", "Travail d'équipe", "Rigueur"],
+    skills: [t("Logistique", "Logistics"), t("Gestion de stocks", "Stock management"), t("Travail d'équipe", "Teamwork"), t("Rigueur", "Rigor")],
     links: {},
   },
 ];
 
-const distinctions = [
+const getEducation = (t: TFunc) => [
   {
-    emoji: "🤝",
-    title: "Travail d'équipe & Autonomie",
-    desc: "Force de proposition, capacité d'adaptation rapide dans des environnements techniques variés",
-    accent: "green",
-  },
-  {
-    emoji: "🔍",
-    title: "Curiosité & Rigueur",
-    desc: "Volonté de comprendre, d'optimiser et d'innover dans chaque projet",
-    accent: "blue",
-  },
-  {
-    emoji: "💡",
-    title: "Proactivité & Innovation",
-    desc: "Toujours à la recherche de solutions créatives et d'améliorations continues",
-    accent: "purple",
-  },
-  {
-    emoji: "🎯",
-    title: "Adaptabilité",
-    desc: "Intégration rapide dans des environnements techniques et culturels variés",
-    accent: "yellow",
-  },
-];
-
-const education = [
-  {
-    degree: "Diplôme d'Ingénieur en Informatique",
-    school: "ESIR (École Supérieure d'Ingénieurs de Rennes)",
-    specialization: "Spécialisation : Système d'Information, Sécurité et Data Intelligence",
+    degree: t("Diplôme d'Ingénieur en Informatique", "Master's Degree in Computer Engineering"),
+    school: t("ESIR (École Supérieure d'Ingénieurs de Rennes)", "ESIR (Rennes Graduate School of Engineering)"),
+    specialization: t(
+      "Spécialisation : Système d'Information, Sécurité et Data Intelligence",
+      "Major: Information Systems, Security and Data Intelligence",
+    ),
     location: "Rennes, France",
-    period: "Septembre 2024 – En cours",
+    period: t("Septembre 2024 – En cours", "September 2024 – Present"),
     accent: "green",
     highlights: [
-      "Développement logiciel avancé, Intelligence artificielle, Big Data",
-      "Systèmes distribués, Parallélisme",
-      "Gestion de projet, Management, Communication, Séminaires de recherche",
+      t(
+        "Développement logiciel avancé, Intelligence artificielle, Big Data",
+        "Advanced software development, Artificial intelligence, Big Data",
+      ),
+      t("Systèmes distribués, Parallélisme", "Distributed systems, Parallel computing"),
+      t(
+        "Gestion de projet, Management, Communication, Séminaires de recherche",
+        "Project management, Leadership, Communication, Research seminars",
+      ),
     ],
   },
   {
-    degree: "Cycle Ingénieur Informatique (Niveau Master 1)",
+    degree: t("Cycle Ingénieur Informatique (Niveau Master 1)", "Computer Engineering Program (Master 1 level)"),
     school: "ECE Paris-Lyon",
     specialization: "",
     location: "Lyon / Paris, France",
-    period: "Septembre 2022 – Février 2024",
+    period: t("Septembre 2022 – Février 2024", "September 2022 – February 2024"),
     accent: "purple",
     highlights: [
-      "Technologies web avancées, Bases de données avancées",
-      "DevOps, Sécurité des réseaux informatiques",
-      "Systèmes d'exploitation (Linux, Windows)",
+      t(
+        "Technologies web avancées, Bases de données avancées",
+        "Advanced web technologies, Advanced databases",
+      ),
+      t("DevOps, Sécurité des réseaux informatiques", "DevOps, Network security"),
+      t("Systèmes d'exploitation (Linux, Windows)", "Operating systems (Linux, Windows)"),
     ],
   },
 ];
 
 
 function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) {
+  const { t } = useLang();
   const [open, setOpen] = useState(false);
   const a = accentMap[exp.accent as AccentKey];
   const hasLinks = exp.links.github || exp.links.demo || exp.links.images;
@@ -295,7 +332,7 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                   className="text-slate-400 text-xs uppercase tracking-widest mb-3"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
-                  Missions
+                  {t("Missions", "Responsibilities")}
                 </h4>
                 <ul className="space-y-2 mb-5">
                   {exp.achievements.map((item, i) => (
@@ -334,7 +371,7 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                         style={{ fontFamily: "var(--font-heading)" }}
                       >
                         <Github className="w-4 h-4" />
-                        Code source
+                        {t("Code source", "Source code")}
                       </a>
                     )}
                     {exp.links.demo && (
@@ -346,7 +383,7 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                         style={{ fontFamily: "var(--font-heading)" }}
                       >
                         <ExternalLink className="w-4 h-4" />
-                        Voir le projet
+                        {t("Voir le projet", "View project")}
                       </a>
                     )}
                     {exp.links.images && (
@@ -358,7 +395,7 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
                         style={{ fontFamily: "var(--font-heading)" }}
                       >
                         <Images className="w-4 h-4" />
-                        Captures d'écran
+                        {t("Captures d'écran", "Screenshots")}
                       </a>
                     )}
                   </div>
@@ -374,27 +411,34 @@ function ExperienceCard({ exp, index }: { exp: ExperienceItem; index: number }) 
 
 
 export function Experience() {
+  const { t } = useLang();
+  const experiences = getExperiences(t);
+  const education = getEducation(t);
+
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-10">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 60, damping: 18 }}
-        className="text-center mb-16"
+        className="text-center mb-10"
       >
         <h1
-          className="text-4xl md:text-5xl font-bold text-white mb-4"
+          className="text-3xl md:text-4xl font-bold text-white mb-2"
           style={{ fontFamily: "var(--font-heading)" }}
         >
-          Parcours & Expériences
+          {t("Parcours & Expériences", "Background & Experience")}
         </h1>
-        <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-          Mon parcours académique et professionnel en Informatique, Data et
-          Transformation Digitale
+        <p className="text-base text-slate-400 max-w-2xl mx-auto">
+          {t(
+            "Mon parcours académique et professionnel en Informatique, Data et Transformation Digitale",
+            "My academic and professional journey in Computer Science, Data and Digital Transformation",
+          )}
         </p>
       </motion.div>
 
-      <section className="mb-16">
+      <div className="grid xl:grid-cols-2 gap-x-10 items-start">
+      <section className="mb-10">
         <div className="flex items-center gap-3 mb-8">
           <div className="w-9 h-9 rounded-xl bg-blue-500/15 border border-blue-400/25 flex items-center justify-center">
             <Briefcase className="w-4 h-4 text-blue-400" />
@@ -403,7 +447,7 @@ export function Experience() {
             className="text-2xl font-bold text-white"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            Expérience Professionnelle
+            {t("Expérience Professionnelle", "Professional Experience")}
           </h2>
         </div>
 
@@ -417,7 +461,7 @@ export function Experience() {
         </div>
       </section>
 
-      <section className="mb-16">
+      <section className="mb-10">
         <div className="flex items-center gap-3 mb-8">
           <div className="w-9 h-9 rounded-xl bg-purple-500/15 border border-purple-400/25 flex items-center justify-center">
             <GraduationCap className="w-4 h-4 text-purple-400" />
@@ -426,7 +470,7 @@ export function Experience() {
             className="text-2xl font-bold text-white"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            Formation
+            {t("Formation", "Education")}
           </h2>
         </div>
 
@@ -501,8 +545,9 @@ export function Experience() {
           </div>
         </div>
       </section>
+      </div>
 
-      <section className="mb-16">
+      <section className="mb-10">
         <div className="flex items-center gap-3 mb-8">
           <div className="w-9 h-9 rounded-xl bg-cyan-500/15 border border-cyan-400/25 flex items-center justify-center">
             <BadgeCheck className="w-4 h-4 text-cyan-400" />
@@ -515,48 +560,81 @@ export function Experience() {
           </h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
           {[
             {
-              title: "Python pour la Data Analyse #3",
+              title: t("Python pour la Data Analyse #3", "Python for Data Analysis #3"),
               issuer: "DataScientest",
-              date: "Novembre 2023",
+              date: t("Novembre 2023", "November 2023"),
               location: "Paris",
               accent: "green",
               highlights: [
-                "Programmation en Python (bases et avancé)",
-                "Manipulation de données avec Pandas (DataFrames, nettoyage, transformation)",
-                "Visualisation des données avec Matplotlib et Seaborn",
-                "Concepts statistiques pour l'analyse des données",
-                "Automatisation et gestion de datasets",
+                t("Programmation en Python (bases et avancé)", "Python programming (basics and advanced)"),
+                t(
+                  "Manipulation de données avec Pandas (DataFrames, nettoyage, transformation)",
+                  "Data manipulation with Pandas (DataFrames, cleaning, transformation)",
+                ),
+                t(
+                  "Visualisation des données avec Matplotlib et Seaborn",
+                  "Data visualization with Matplotlib and Seaborn",
+                ),
+                t(
+                  "Concepts statistiques pour l'analyse des données",
+                  "Statistical concepts for data analysis",
+                ),
+                t("Automatisation et gestion de datasets", "Automation and dataset management"),
               ],
             },
             {
-              title: "MOOC Gestion de Projet — Tronc commun GdP 20",
+              title: t(
+                "MOOC Gestion de Projet — Tronc commun GdP 20",
+                "Project Management MOOC — GdP 20 core curriculum",
+              ),
               issuer: "Centrale Lille — Rémi Bachelet",
               date: "2023",
-              location: "En ligne",
+              location: t("En ligne", "Online"),
               accent: "purple",
               highlights: [
-                "Méthodologie de gestion de projet (cycle de vie, objectifs, livrables)",
-                "Planification et organisation (PERT, Gantt, gestion des ressources)",
-                "Gestion des risques et des parties prenantes",
-                "Outils et techniques de suivi de projet",
-                "Approches agiles et traditionnelles",
+                t(
+                  "Méthodologie de gestion de projet (cycle de vie, objectifs, livrables)",
+                  "Project management methodology (lifecycle, goals, deliverables)",
+                ),
+                t(
+                  "Planification et organisation (PERT, Gantt, gestion des ressources)",
+                  "Planning and organization (PERT, Gantt, resource management)",
+                ),
+                t("Gestion des risques et des parties prenantes", "Risk and stakeholder management"),
+                t("Outils et techniques de suivi de projet", "Project tracking tools and techniques"),
+                t("Approches agiles et traditionnelles", "Agile and traditional approaches"),
               ],
             },
             {
               title: "Scientific Computing with Python",
               issuer: "freeCodeCamp",
-              date: "Avril 2026",
-              location: "En ligne",
+              date: t("Avril 2026", "April 2026"),
+              location: t("En ligne", "Online"),
               accent: "blue",
               highlights: [
-                "Maîtrise des fondamentaux Python (variables, structures de contrôle, fonctions)",
-                "Manipulation avancée des chaînes de caractères et structures de données",
-                "Programmation orientée objet et modularisation de code",
-                "Lecture/écriture de fichiers et gestion des exceptions",
-                "Résolution d'exercices pratiques de calcul scientifique en Python",
+                t(
+                  "Maîtrise des fondamentaux Python (variables, structures de contrôle, fonctions)",
+                  "Mastery of Python fundamentals (variables, control structures, functions)",
+                ),
+                t(
+                  "Manipulation avancée des chaînes de caractères et structures de données",
+                  "Advanced string and data structure manipulation",
+                ),
+                t(
+                  "Programmation orientée objet et modularisation de code",
+                  "Object-oriented programming and code modularization",
+                ),
+                t(
+                  "Lecture/écriture de fichiers et gestion des exceptions",
+                  "File reading/writing and exception handling",
+                ),
+                t(
+                  "Résolution d'exercices pratiques de calcul scientifique en Python",
+                  "Solving practical scientific computing exercises in Python",
+                ),
               ],
             },
           ].map((cert, index) => {

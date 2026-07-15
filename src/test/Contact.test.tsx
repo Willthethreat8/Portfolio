@@ -46,7 +46,8 @@ describe("Contact – Formulaire EmailJS", () => {
 
     expect(screen.getByText(/informations de contact/i)).toBeInTheDocument();
     expect(screen.getByText(/rennes, france/i)).toBeInTheDocument();
-    expect(screen.getByText(/disponibilité/i)).toBeInTheDocument();
+    expect(screen.getByText("Téléphone")).toBeInTheDocument();
+    expect(screen.getByText("Localisation")).toBeInTheDocument();
   });
 
   it("affiche le titre de la page", () => {

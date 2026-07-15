@@ -9,6 +9,8 @@ vi.mock("motion/react", () => motionMock);
 import { Layout } from "../app/components/Layout";
 
 function renderLayout(initialRoute = "/") {
+  // Empêche l'overlay de bienvenue de s'ouvrir automatiquement dans les tests
+  localStorage.setItem("welcome-tour-seen", "1");
   return render(
     <MemoryRouter initialEntries={[initialRoute]}>
       <Layout />
@@ -59,8 +61,8 @@ describe("Layout – Navigation & Footer", () => {
     const user = userEvent.setup();
     renderLayout();
 
-    // Find the mobile menu button (has Menu or X icon)
-    const mobileButton = screen.getByRole("button");
+    // Le bouton hamburger porte l'aria-label "Menu"
+    const mobileButton = screen.getByRole("button", { name: "Menu" });
 
     // Initially, mobile nav items are in desktop nav but mobile menu section should not exist
     // After click, it should show mobile nav links

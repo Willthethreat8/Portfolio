@@ -23,7 +23,7 @@ const cache: Record<string, React.ForwardRefExoticComponent<React.PropsWithChild
 function getMotionComponent(tag: string) {
   if (!cache[tag]) {
     cache[tag] = React.forwardRef<HTMLElement, React.PropsWithChildren<Record<string, unknown>>>(
-      ({ children, ...p }, ref) => React.createElement(tag, { ...strip(p), ref }, children)
+      ({ children, ...p }, ref) => React.createElement(tag, { ...strip(p), ref }, children as React.ReactNode)
     );
     cache[tag].displayName = `motion.${tag}`;
   }

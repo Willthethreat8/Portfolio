@@ -2,8 +2,10 @@ import { motion } from "motion/react";
 import { Mail, Phone, MapPin, Linkedin, Github, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
+import { useLang } from "../i18n";
 
 export function Contact() {
+  const { t } = useLang();
   const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -33,7 +35,12 @@ export function Contact() {
     } catch (err) {
       console.error("EmailJS error:", err);
       setStatus("error");
-      setErrorMsg("Une erreur est survenue. Veuillez réessayer ou m'écrire directement par email.");
+      setErrorMsg(
+        t(
+          "Une erreur est survenue. Veuillez réessayer ou m'écrire directement par email.",
+          "Something went wrong. Please try again or email me directly.",
+        ),
+      );
       setTimeout(() => setStatus("idle"), 5000);
     }
   };
@@ -51,19 +58,21 @@ export function Contact() {
     "w-full px-4 py-3 bg-slate-900/60 border border-white/10 rounded-xl text-white placeholder-slate-500 focus:border-green-400/60 focus:outline-none focus:ring-1 focus:ring-green-400/30 transition-all";
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-10">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 60, damping: 18 }}
-        className="text-center mb-12"
+        className="text-center mb-8"
       >
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: "var(--font-heading)" }}>
-          Contactez-moi
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-heading)" }}>
+          {t("Contactez-moi", "Get in touch")}
         </h1>
-        <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-          N'hésitez pas à me contacter pour discuter d'opportunités
-          professionnelles, de projets ou simplement pour échanger
+        <p className="text-base text-slate-400 max-w-3xl mx-auto">
+          {t(
+            "N'hésitez pas à me contacter pour discuter d'opportunités professionnelles, de projets ou simplement pour échanger",
+            "Feel free to reach out to discuss job opportunities, projects, or just to connect",
+          )}
         </p>
       </motion.div>
 
@@ -78,7 +87,7 @@ export function Contact() {
             <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500" />
 
             <h2 className="text-xl font-bold text-white mb-6" style={{ fontFamily: "var(--font-heading)" }}>
-              Informations de contact
+              {t("Informations de contact", "Contact information")}
             </h2>
 
             <div className="space-y-5">
@@ -102,7 +111,7 @@ export function Contact() {
                   <Phone className="w-4 h-4 text-blue-400" />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-500 mb-0.5">Téléphone</div>
+                  <div className="text-xs text-slate-500 mb-0.5">{t("Téléphone", "Phone")}</div>
                   <a
                     href="tel:+33766197025"
                     className="text-slate-300 hover:text-blue-400 transition-colors text-sm"
@@ -117,14 +126,14 @@ export function Contact() {
                   <MapPin className="w-4 h-4 text-purple-400" />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-500 mb-0.5">Localisation</div>
+                  <div className="text-xs text-slate-500 mb-0.5">{t("Localisation", "Location")}</div>
                   <div className="text-slate-300 text-sm">Rennes, France</div>
                 </div>
               </div>
             </div>
 
             <div className="mt-7 pt-6 border-t border-white/10">
-              <p className="text-xs text-slate-500 mb-3">Retrouvez-moi sur</p>
+              <p className="text-xs text-slate-500 mb-3">{t("Retrouvez-moi sur", "Find me on")}</p>
               <div className="flex gap-3">
                 <a
                   href="https://www.linkedin.com/in/sir-william-ngoma-3ab907173/"
@@ -165,7 +174,7 @@ export function Contact() {
             <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-green-500 to-emerald-500" />
 
             <h2 className="text-xl font-bold text-white mb-6" style={{ fontFamily: "var(--font-heading)" }}>
-              Envoyez-moi un message
+              {t("Envoyez-moi un message", "Send me a message")}
             </h2>
 
             {status === "success" ? (
@@ -176,11 +185,13 @@ export function Contact() {
               >
                 <CheckCircle2 className="w-14 h-14 text-green-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-green-300 mb-2" style={{ fontFamily: "var(--font-heading)" }}>
-                  Message envoyé !
+                  {t("Message envoyé !", "Message sent!")}
                 </h3>
                 <p className="text-slate-400 text-sm">
-                  Merci pour votre message. Je vous répondrai dans les plus
-                  brefs délais.
+                  {t(
+                    "Merci pour votre message. Je vous répondrai dans les plus brefs délais.",
+                    "Thank you for your message. I'll get back to you as soon as possible.",
+                  )}
                 </p>
               </motion.div>
             ) : status === "error" ? (
@@ -191,7 +202,7 @@ export function Contact() {
               >
                 <AlertCircle className="w-14 h-14 text-red-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-red-300 mb-2" style={{ fontFamily: "var(--font-heading)" }}>
-                  Erreur d'envoi
+                  {t("Erreur d'envoi", "Sending failed")}
                 </h3>
                 <p className="text-slate-400 text-sm">
                   {errorMsg}
@@ -202,7 +213,7 @@ export function Contact() {
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="name" className="block text-sm text-slate-400 mb-2">
-                      Nom complet *
+                      {t("Nom complet *", "Full name *")}
                     </label>
                     <input
                       type="text"
@@ -212,7 +223,7 @@ export function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       className={inputClass}
-                      placeholder="Jean Dupont"
+                      placeholder={t("Jean Dupont", "John Smith")}
                     />
                   </div>
 
@@ -228,14 +239,14 @@ export function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       className={inputClass}
-                      placeholder="jean.dupont@example.com"
+                      placeholder={t("jean.dupont@example.com", "john.smith@example.com")}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="subject" className="block text-sm text-slate-400 mb-2">
-                    Sujet *
+                    {t("Sujet *", "Subject *")}
                   </label>
                   <input
                     type="text"
@@ -245,7 +256,7 @@ export function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     className={inputClass}
-                    placeholder="Opportunité professionnelle"
+                    placeholder={t("Opportunité professionnelle", "Job opportunity")}
                   />
                 </div>
 
@@ -261,7 +272,7 @@ export function Contact() {
                     onChange={handleChange}
                     rows={6}
                     className={`${inputClass} resize-none`}
-                    placeholder="Votre message..."
+                    placeholder={t("Votre message...", "Your message...")}
                   />
                 </div>
 
@@ -274,12 +285,12 @@ export function Contact() {
                   {status === "sending" ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      Envoi en cours...
+                      {t("Envoi en cours...", "Sending...")}
                     </>
                   ) : (
                     <>
                       <Send className="w-4 h-4" />
-                      Envoyer le message
+                      {t("Envoyer le message", "Send message")}
                     </>
                   )}
                 </button>

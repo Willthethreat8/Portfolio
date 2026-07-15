@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router";
 import { motionMock } from "./helpers";
 
@@ -15,16 +16,20 @@ function renderHome() {
   );
 }
 
-describe("Home – Page d'accueil", () => {
+describe("Home – Accueil (bento grid)", () => {
   it("affiche le nom complet", () => {
     renderHome();
     expect(screen.getByText("Sir William NGOMA")).toBeInTheDocument();
   });
 
-  it("affiche le titre Software Engineer", () => {
+  it("affiche le titre Data & AI Engineer", () => {
     renderHome();
-    expect(screen.getByText("Software")).toBeInTheDocument();
-    expect(screen.getByText("Engineer")).toBeInTheDocument();
+    expect(screen.getByText("Data & AI Engineer")).toBeInTheDocument();
+  });
+
+  it("affiche le badge de disponibilité", () => {
+    renderHome();
+    expect(screen.getByText(/disponible pour un cdi/i)).toBeInTheDocument();
   });
 
   it("affiche la mention ESIR", () => {
@@ -33,25 +38,10 @@ describe("Home – Page d'accueil", () => {
     expect(matches.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("affiche le badge de disponibilité", () => {
+  it("affiche les langues (TOEIC)", () => {
     renderHome();
-    expect(screen.getByText(/disponible pour un cdi/i)).toBeInTheDocument();
-  });
-
-  it("affiche les 5 badges d'expertise", () => {
-    renderHome();
-    expect(screen.getByText("Dev Full Stack")).toBeInTheDocument();
-    expect(screen.getByText("Data Engineer")).toBeInTheDocument();
-    expect(screen.getByText("Business Analyst")).toBeInTheDocument();
-    expect(screen.getByText("IA Générative")).toBeInTheDocument();
-    expect(screen.getByText("Chef de Projet / Product Owner")).toBeInTheDocument();
-  });
-
-  it("affiche les langues parlées", () => {
-    renderHome();
-    expect(screen.getByText(/français/i)).toBeInTheDocument();
-    expect(screen.getByText(/anglais/i)).toBeInTheDocument();
-    expect(screen.getByText(/toeic/i)).toBeInTheDocument();
+    const matches = screen.getAllByText(/toeic/i);
+    expect(matches.length).toBeGreaterThanOrEqual(1);
   });
 
   it("affiche le bouton Télécharger CV avec le bon lien", () => {
@@ -61,54 +51,102 @@ describe("Home – Page d'accueil", () => {
     expect(cvLink).toHaveAttribute("download");
   });
 
-  it("affiche le bouton Me contacter avec lien vers /contact", () => {
+  it("affiche au moins un lien vers /contact", () => {
     renderHome();
-    const contactLink = screen.getByText(/me contacter/i).closest("a");
-    expect(contactLink).toHaveAttribute("href", "/contact");
+    const contactLinks = screen
+      .getAllByText(/me contacter/i)
+      .map((el) => el.closest("a"));
+    expect(contactLinks.length).toBeGreaterThanOrEqual(1);
+    expect(contactLinks[0]).toHaveAttribute("href", "/contact");
   });
 
-  it("contient un lien GitHub", () => {
+  it("contient les liens GitHub, LinkedIn et email", () => {
     renderHome();
-    const ghLink = document.querySelector('a[href*="github.com/Willthethreat8"]');
+    expect(
+      document.querySelector('a[href*="github.com/Willthethreat8"]')
+    ).toBeInTheDocument();
+    expect(document.querySelector('a[href*="linkedin.com"]')).toBeInTheDocument();
+    expect(
+      document.querySelector('a[href="mailto:nsirwilliam@gmail.com"]')
+    ).toBeInTheDocument();
+  });
+
+  // ── Tuile AeroTwin ──
+
+  it("affiche la tuile projet vedette AeroTwin", () => {
+    renderHome();
+    expect(screen.getByText(/projet vedette/i)).toBeInTheDocument();
+    expect(screen.getByText(/aerotwin/i)).toBeInTheDocument();
+    expect(screen.getByText(/en cours/i)).toBeInTheDocument();
+  });
+
+  it("affiche les étapes du pipeline AeroTwin", () => {
+    renderHome();
+    for (const stage of ["N-CMAPSS", "dbt", "XGBoost", "FastAPI"]) {
+      expect(screen.getByText(stage)).toBeInTheDocument();
+    }
+  });
+
+  it("contient un lien GitHub vers le projet AeroTwin", () => {
+    renderHome();
+    const ghLink = document.querySelector(
+      'a[href*="github.com/Willthethreat8/Data_project"]'
+    );
     expect(ghLink).toBeInTheDocument();
   });
 
-  it("contient un lien LinkedIn", () => {
+  // ── Tuile stats ──
+
+  it("affiche les labels des statistiques", () => {
     renderHome();
-    const liLink = document.querySelector('a[href*="linkedin.com"]');
-    expect(liLink).toBeInTheDocument();
+    expect(screen.getByText("Projets")).toBeInTheDocument();
+    expect(screen.getByText("Technologies")).toBeInTheDocument();
+    expect(screen.getByText("TOEIC")).toBeInTheDocument();
   });
 
-  it("contient un lien email", () => {
-    renderHome();
-    const mailLink = document.querySelector('a[href="mailto:nsirwilliam@gmail.com"]');
-    expect(mailLink).toBeInTheDocument();
-  });
+  // ── Tuile À propos (repliable) ──
 
-  it("affiche la section À propos de moi", () => {
+  it("affiche l'à propos condensé avec Congo-Brazzaville", () => {
     renderHome();
     expect(screen.getByText(/à propos de moi/i)).toBeInTheDocument();
     expect(screen.getByText(/congo-brazzaville/i)).toBeInTheDocument();
   });
 
-  it("affiche les 4 qualités", () => {
+  it("déplie le texte complet au clic sur En savoir plus", async () => {
+    const user = userEvent.setup();
     renderHome();
-    expect(screen.getByText(/qualités & savoir-être/i)).toBeInTheDocument();
+    expect(
+      screen.queryByText(/product owner ou lead technique/i)
+    ).not.toBeInTheDocument();
+    await user.click(screen.getByText(/en savoir plus/i));
+    expect(
+      screen.getByText(/product owner ou lead technique/i)
+    ).toBeInTheDocument();
+  });
+
+  // ── Tuiles secondaires ──
+
+  it("affiche la tuile compétences avec lien vers /competences", () => {
+    renderHome();
+    const link = screen.getByText(/voir tout/i).closest("a");
+    expect(link).toHaveAttribute("href", "/competences");
+  });
+
+  it("affiche la tuile qualités", () => {
+    renderHome();
     expect(screen.getByText(/travail d'équipe/i)).toBeInTheDocument();
     expect(screen.getByText(/curiosité & rigueur/i)).toBeInTheDocument();
-    expect(screen.getByText(/proactivité & innovation/i)).toBeInTheDocument();
     expect(screen.getByText(/adaptabilité/i)).toBeInTheDocument();
   });
 
-  it("affiche la citation de Nelson Mandela", () => {
+  it("affiche la tuile hobbies avec lien vers /hobbies", () => {
     renderHome();
-    expect(screen.getByText(/cela semble toujours impossible/i)).toBeInTheDocument();
-    expect(screen.getByText(/nelson mandela/i)).toBeInTheDocument();
+    const link = screen.getByText(/découvrir/i).closest("a");
+    expect(link).toHaveAttribute("href", "/hobbies");
   });
 
-  it("affiche les labels DATA · IA · GENAI et ESIR · 2026", () => {
+  it("affiche la citation d'Alan Kay", () => {
     renderHome();
-    expect(screen.getByText("DATA · IA · GENAI")).toBeInTheDocument();
-    expect(screen.getByText("ESIR · 2026")).toBeInTheDocument();
+    expect(screen.getByText(/alan kay/i)).toBeInTheDocument();
   });
 });

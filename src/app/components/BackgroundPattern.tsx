@@ -1,6 +1,47 @@
+const particles = [
+  { left: "8%", size: 4, color: "rgba(52,211,153,0.5)", duration: 22, delay: 0 },
+  { left: "18%", size: 3, color: "rgba(34,211,238,0.4)", duration: 28, delay: 4 },
+  { left: "31%", size: 5, color: "rgba(52,211,153,0.35)", duration: 25, delay: 9 },
+  { left: "44%", size: 3, color: "rgba(34,211,238,0.5)", duration: 30, delay: 2 },
+  { left: "57%", size: 4, color: "rgba(52,211,153,0.4)", duration: 24, delay: 12 },
+  { left: "69%", size: 3, color: "rgba(34,211,238,0.35)", duration: 27, delay: 6 },
+  { left: "81%", size: 5, color: "rgba(52,211,153,0.45)", duration: 23, delay: 15 },
+  { left: "92%", size: 3, color: "rgba(34,211,238,0.45)", duration: 29, delay: 8 },
+];
+
 export function BackgroundPattern() {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <style>{`
+        @keyframes gradient-x {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        @keyframes float-up {
+          0% { transform: translateY(105vh) rotate(0deg); opacity: 0; }
+          8% { opacity: 1; }
+          92% { opacity: 1; }
+          100% { transform: translateY(-5vh) rotate(180deg); opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .bg-particle { display: none; }
+        }
+      `}</style>
+
+      {particles.map((p, i) => (
+        <span
+          key={i}
+          className="bg-particle absolute rounded-sm"
+          style={{
+            left: p.left,
+            top: 0,
+            width: p.size,
+            height: p.size,
+            backgroundColor: p.color,
+            animation: `float-up ${p.duration}s linear ${p.delay}s infinite`,
+          }}
+        />
+      ))}
       <div
         className="absolute inset-0"
         style={{

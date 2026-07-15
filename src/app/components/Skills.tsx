@@ -8,13 +8,17 @@ import {
   BarChart3,
   GraduationCap,
 } from "lucide-react";
+import { useLang } from "../i18n";
+import { getTechIcon } from "../techIcons";
 
 export function Skills() {
+  const { t } = useLang();
+
   const skillCategories = [
     {
-      title: "Langages de Programmation",
+      title: t("Langages de Programmation", "Programming Languages"),
       icon: Code,
-      color: "blue",
+      color: "cyan",
       skills: [
         "Python ",
         "Java",
@@ -24,7 +28,7 @@ export function Skills() {
       ],
     },
     {
-      title: "Frameworks & Librairies",
+      title: t("Frameworks & Librairies", "Frameworks & Libraries"),
       icon: Workflow,
       color: "green",
       skills: [
@@ -37,7 +41,7 @@ export function Skills() {
     {
       title: "Data Engineering",
       icon: Database,
-      color: "cyan",
+      color: "green",
       skills: [
         "Apache Kafka",
         "Apache Spark",
@@ -47,33 +51,33 @@ export function Skills() {
       ],
     },
     {
-      title: "Intelligence Artificielle",
+      title: t("Intelligence Artificielle", "Artificial Intelligence"),
       icon: Brain,
-      color: "purple",
+      color: "green",
       skills: [
         "Machine Learning",
-        "IA Générative",
+        t("IA Générative", "Generative AI"),
         "RAG",
         "LLMs",
         "Prompt Engineering",
       ],
     },
     {
-      title: "Business Analysis & Méthodologies",
+      title: t("Business Analysis & Méthodologies", "Business Analysis & Methodologies"),
       icon: BarChart3,
-      color: "pink",
+      color: "cyan",
       skills: [
-        "Méthodologies Agile / Scrum",
+        t("Méthodologies Agile / Scrum", "Agile / Scrum methodologies"),
         "User Stories",
         "Backlog Management",
-        "Cahier des charges",
-        "Analyse fonctionnelle",
+        t("Cahier des charges", "Requirements specification"),
+        t("Analyse fonctionnelle", "Functional analysis"),
       ],
     },
     {
       title: "DevOps & Cloud",
       icon: Cloud,
-      color: "orange",
+      color: "green",
       skills: [
         "Docker",
         "Git",
@@ -84,9 +88,9 @@ export function Skills() {
       ],
     },
     {
-      title: "Outils & Collaboration",
+      title: t("Outils & Collaboration", "Tools & Collaboration"),
       icon: Workflow,
-      color: "blue",
+      color: "cyan",
       skills: [
         "Jira",
         "Confluence",
@@ -96,11 +100,11 @@ export function Skills() {
       ],
     },
     {
-      title: "Réseaux & Conformité",
+      title: t("Réseaux & Conformité", "Networks & Compliance"),
       icon: Database,
-      color: "blue",
+      color: "green",
       skills: [
-        "Protocoles TCP/IP",
+        t("Protocoles TCP/IP", "TCP/IP protocols"),
         "ISO 27001",
         "RGPD",
       ],
@@ -162,33 +166,39 @@ export function Skills() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-10">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 60, damping: 18 }}
-        className="text-center mb-14"
+        className="text-center mb-8"
       >
         <h1
-          className="text-4xl md:text-5xl font-bold text-white mb-4"
+          className="text-3xl md:text-4xl font-bold text-white mb-2"
           style={{ fontFamily: "var(--font-heading)" }}
         >
-          Compétences Techniques
+          {t("Compétences Techniques", "Technical Skills")}
         </h1>
-        <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-          Un ensemble de compétences acquises au cours de ma formation à l'ESIR
-          et de mes projets personnels et professionnels
+        <p className="text-base text-slate-400 max-w-3xl mx-auto">
+          {t(
+            "Un ensemble de compétences acquises au cours de ma formation à l'ESIR et de mes projets personnels et professionnels",
+            "A set of skills built through my studies at ESIR and my personal and professional projects",
+          )}
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {skillCategories.map((category, index) => {
           const c = colorMap[category.color];
           const Icon = category.icon;
 
           return (
-            <div
+            <motion.div
               key={category.title}
+              initial={{ opacity: 0, y: 24, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ type: "spring", stiffness: 110, damping: 16, delay: index * 0.05 }}
               className={`rounded-2xl border backdrop-blur-sm ${c.card} overflow-hidden`}
             >
               <div className={`flex items-center gap-3 px-6 py-4 ${c.header}`}>
@@ -204,22 +214,26 @@ export function Skills() {
               </div>
 
               <div className="px-6 py-5 flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className={`px-3 py-1.5 rounded-lg border text-sm transition-colors cursor-default ${c.chip}`}
-                    style={{ fontFamily: "var(--font-mono)" }}
-                  >
-                    {skill}
-                  </span>
-                ))}
+                {category.skills.map((skill) => {
+                  const icon = getTechIcon(skill);
+                  return (
+                    <span
+                      key={skill}
+                      className={`px-3 py-1.5 rounded-lg border text-sm transition-colors cursor-default inline-flex items-center gap-1.5 ${c.chip}`}
+                      style={{ fontFamily: "var(--font-mono)" }}
+                    >
+                      {icon && <i className={`${icon} colored text-base`} aria-hidden="true" />}
+                      {skill}
+                    </span>
+                  );
+                })}
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>
 
-      <div className="mt-14">
+      <div className="mt-10">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-9 h-9 rounded-lg bg-yellow-500/15 flex items-center justify-center">
             <GraduationCap className="w-5 h-5 text-yellow-400" />
@@ -228,11 +242,14 @@ export function Skills() {
             className="text-2xl font-bold text-white"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            En cours d'apprentissage
+            {t("En cours d'apprentissage", "Currently learning")}
           </h2>
         </div>
         <p className="text-slate-400 text-sm mb-6">
-          Technologies que je suis en train d'approfondir dans le cadre de mes projets et de mon alternance.
+          {t(
+            "Technologies que je suis en train d'approfondir dans le cadre de mes projets et de mon alternance.",
+            "Technologies I'm currently deepening through my projects and apprenticeship.",
+          )}
         </p>
         <div className="flex flex-wrap gap-3">
           {[
@@ -242,16 +259,20 @@ export function Skills() {
             "AWS",
             "GitHub Actions",
             "Kubernetes",
-          ].map((skill, i) => (
-            <span
-              key={skill}
-              className="px-4 py-2 rounded-xl border border-yellow-400/25 bg-yellow-500/10 text-yellow-300 text-sm flex items-center gap-2 cursor-default hover:bg-yellow-500/20 transition-colors"
-              style={{ fontFamily: "var(--font-mono)" }}
-            >
-              <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse" />
-              {skill}
-            </span>
-          ))}
+          ].map((skill) => {
+            const icon = getTechIcon(skill);
+            return (
+              <span
+                key={skill}
+                className="px-4 py-2 rounded-xl border border-yellow-400/25 bg-yellow-500/10 text-yellow-300 text-sm flex items-center gap-2 cursor-default hover:bg-yellow-500/20 transition-colors"
+                style={{ fontFamily: "var(--font-mono)" }}
+              >
+                <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse" />
+                {icon && <i className={`${icon} colored text-base`} aria-hidden="true" />}
+                {skill}
+              </span>
+            );
+          })}
         </div>
       </div>
     </div>
