@@ -51,9 +51,9 @@ describe("Projects – Projets réalisés", () => {
 
   it("affiche les chips de la stack AeroTwin", () => {
     renderProjects();
-    expect(screen.getByText("Kafka")).toBeInTheDocument();
-    expect(screen.getByText("Spark")).toBeInTheDocument();
-    expect(screen.getByText("Airflow")).toBeInTheDocument();
+    expect(screen.getByText("Prefect")).toBeInTheDocument();
+    expect(screen.getByText("dbt")).toBeInTheDocument();
+    expect(screen.getByText("PostGIS")).toBeInTheDocument();
     expect(screen.getByText("XGBoost")).toBeInTheDocument();
     expect(screen.getByText("MLflow")).toBeInTheDocument();
   });
